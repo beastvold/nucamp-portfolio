@@ -1,15 +1,18 @@
 import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
+import GlobalStyles from '../GlobalStyles';
 
 function BookList(props) {
 
     const renderBook = ({item}) => {
-        console.log(`Rendering one book: ${item.title}`);
         return (
-            <View> 
-                <Text>Rendering {item.title}...</Text>
-                <ListItem bottomDivider>
+            <View>
+                <Text style={GlobalStyles.bookInfoText}>Select a book for more info.</Text>
+                <ListItem 
+                    bottomDivider
+                    onPress={() => props.onPress(item.id)}
+                >
                     <Avatar 
                         source={require('../assets/great-expectations.jpg')} 
                         size={"large"}
@@ -23,8 +26,6 @@ function BookList(props) {
         );
     };
 
-    console.log('Now render the FlatList.');
-    console.log('Using: ' + props.books[0].title);
     return (
         <FlatList
             data={props.books}
